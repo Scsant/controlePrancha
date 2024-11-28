@@ -5,25 +5,13 @@ import io
 # Título da aplicação
 st.title("Gestão de Solicitações de Caminhões Pranchas")
 
-# Caminhos pré-definidos para os arquivos Excel
-base_paths = {
-    "Caminho 1 (Pessoal)": "D:/meu_projeto/Painel de movimentacao de maquina.xlsx",
-    "Caminho 2 (Empresa)": "Z:/Compartilhada/Empresa/Painel de movimentacao de maquina.xlsx",
-}
+# Upload do arquivo pelo usuário
+uploaded_file = st.sidebar.file_uploader("Faça o upload do arquivo Excel:", type=["xlsx"])
 
-# Seção lateral para seleção do caminho
-st.sidebar.header("Seleção de Base de Dados")
-selected_path = st.sidebar.selectbox("Escolha o caminho do arquivo:", list(base_paths.keys()))
-
-# Variável para armazenar o caminho completo do arquivo
-file_path = base_paths[selected_path] if selected_path else None
-
-# Botão para confirmar a seleção do caminho
-if st.sidebar.button("Carregar Base"):
-    
+if uploaded_file:
     try:
-        # Ler o arquivo Excel
-        data = pd.read_excel(file_path)
+        # Ler o arquivo Excel enviado
+        data = pd.read_excel(uploaded_file)
 
         # Selecionar as colunas de interesse
         selected_columns = [
