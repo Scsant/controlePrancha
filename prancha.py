@@ -7,18 +7,19 @@ st.title("Gestão de Solicitações de Caminhões Pranchas")
 
 # Caminhos pré-definidos para os arquivos Excel
 base_paths = {
-    "Computador Pessoal": "D:/meu_projeto/Painel de movimentacao de maquina.xlsx",
-    "Computador da Empresa": "Z:/Compartilhada/Empresa/Base_Survey.xlsx",
+    "Caminho 1 (Pessoal)": "D:/meu_projeto/Painel de movimentacao de maquina.xlsx",
+    "Caminho 2 (Empresa)": "Z:/Compartilhada/Empresa/Painel de movimentacao de maquina.xlsx",
 }
 
 # Seção lateral para seleção do caminho
 st.sidebar.header("Seleção de Base de Dados")
-selected_path = st.sidebar.selectbox("Escolha a base de dados:", list(base_paths.keys()))
+selected_path = st.sidebar.selectbox("Escolha o caminho do arquivo:", list(base_paths.keys()))
 
-# Tentativa de carregar o arquivo selecionado
-if selected_path:
-    file_path = base_paths[selected_path]
-    st.sidebar.write(f"Base selecionada: **{file_path}**")
+# Variável para armazenar o caminho completo do arquivo
+file_path = base_paths[selected_path] if selected_path else None
+
+# Botão para confirmar a seleção do caminho
+if st.sidebar.button("Carregar Base"):
     
     try:
         # Ler o arquivo Excel
